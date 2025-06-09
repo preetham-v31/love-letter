@@ -7,6 +7,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
+  /* Background Gradient */
   body {
     margin: 0;
     padding: 20px;
@@ -17,16 +18,55 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    overflow: hidden;
+    position: relative;
   }
 
+  /* Bubbles Container */
+  #bubbles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  /* Bubble style and animation */
+  .bubble {
+    position: absolute;
+    bottom: -100px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation-name: rise;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes rise {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-110vh) scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  /* Main container */
   #container {
+    position: relative;
     max-width: 600px;
     background: rgba(255, 240, 230, 0.95);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     text-align: center;
-    position: relative;
+    z-index: 10;
   }
 
   h1 {
@@ -119,6 +159,9 @@
 </head>
 <body>
 
+<!-- Bubbles Container -->
+<div id="bubbles"></div>
+
 <div id="container">
   <h1>Prema Lekha</h1>
   <h2>For my Ammulu ❤️</h2>
@@ -179,6 +222,29 @@
 </audio>
 
 <script>
+  // Bubbles generation
+  const bubblesContainer = document.getElementById('bubbles');
+  const colors = ['rgba(255,255,255,0.3)', 'rgba(255,255,255,0.4)', 'rgba(255,255,255,0.5)'];
+
+  function createBubble() {
+    const bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    const size = Math.random() * 40 + 20;
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    bubble.style.left = Math.random() * window.innerWidth + 'px';
+    bubble.style.animationDuration = (Math.random() * 10 + 8) + 's';
+    bubble.style.background = colors[Math.floor(Math.random() * colors.length)];
+    bubblesContainer.appendChild(bubble);
+
+    setTimeout(() => {
+      bubble.remove();
+    }, 15000);
+  }
+
+  setInterval(createBubble, 500);
+
+  // Scrollbar elements
   const yesBtn = document.getElementById('yesBtn');
   const noBtn = document.getElementById('noBtn');
   const responseMessage = document.getElementById('responseMessage');

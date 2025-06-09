@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prema Lekha</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+  body {
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    font-family: 'Dancing Script', cursive;
+    color: #5a1a01;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Hearts container (background) */
+  #hearts {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  /* Heart shape */
+  .heart {
+    position: absolute;
+    width: 20px;
+    height: 18px;
+    background: #b22222;
+    transform: rotate(-45deg);
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    opacity: 0.8;
+  }
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 18px;
+    background: #b22222;
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -10px;
+    left: 0;
+  }
+  .heart::after {
+    left: 10px;
+    top: 0;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) rotate(-45deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-110vh) rotate(-45deg);
+      opacity: 0;
+    }
+  }
+
+  /* Main container */
+  #container {
+    position: relative;
+    max-width: 600px;
+    background: rgba(255, 240, 230, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 10;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0;
+    color: #b22222;
+  }
+
+  h2 {
+    font-weight: normal;
+    font-size: 1.3rem;
+    margin-top: 5px;
+    color: #8b0000;
+  }
+
+  /* Letter wrapper */
+  #letter-wrapper {
+    position: relative;
+    max-height: 400px;
+    overflow: hidden;
+    margin-top: 20px;
+    text-align: left;
+    background: #fff0f0;
+    border: 1px solid #d9a5a5;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* Hearts inside letter box */
+  #letter-hearts {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* smaller hearts inside letter */
+  #letter-hearts .heart {
+    width: 14px;
+    height: 12px;
+    animation-duration: 8s;
+    opacity: 0.5;
+  }
+  #letter-hearts .heart::before,
+  #letter-hearts .heart::after {
+    width: 14px;
+    height: 12px;
+  }
+  #letter-hearts .heart::before {
+    top: -8px;
+  }
+  #letter-hearts .heart::after {
+    left: 7px;
+  }
+
+  /* Letter text */
+  #letter {
+    position: relative;
+    padding: 15px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-height: 400px;
+    overflow-y: scroll;
+    white-space: pre-line;
+    box-sizing: border-box;
+    background: transparent;
+    color: #5a1a01;
+    z-index: 2;
+  }
+
+  /* Scrollbar container */
+  #scrollbar {
+    position: absolute;
+    top: 0; right: 0;
+    width: 12px;
+    height: 400px;
+    background: #f6d365;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 3;
+  }
+
+  /* Scroll thumb */
+  #scrollThumb {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 80px;
+    background: #b22222;
+    border-radius: 8px;
+  }
+
+  .btn-group {
+    margin-top: 20px;
+  }
+
+  button {
+    background: #b22222;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 30px;
+    margin: 0 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: #8b0000;
+  }
+
+  #responseMessage {
+    margin-top: 20px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #4b0000;
+    min-height: 60px;
+    white-space: pre-line;
+  }
+</style>
+</head>
+<body>
+
+<!-- Background hearts -->
+<div id="hearts"></div>
+
+<div id="container">
+  <h1>Prema Lekha</h1>
+  <h2>For my Ammulu ❤️</h2>
+
+  <div id="letter-wrapper">
+    <!-- Hearts inside letter box -->
+    <div id="letter-hearts"></div>
+
+    <div id="letter" tabindex="0">
+      snehitha snehitha snehitha ooo snehitha
+
+      Ninnu choodinappati nunchi naa manasu nee pere palukuthunnadhi adhi nee thappa naa thappa ani teliyadam ledhu naaku.
+      Nee vaipu choosthe chaalu nee andhamayna kallatho badinchesthav emi sankellu vesi?
+
+      Nuvvu roju ala andham ga navvuthu nee valalao padesukuntunnav jagratha mari padipothanemo, padipothe mathram adhi nee thappe mari.
+
+      Naaku nuvvu prema kaadhu, nuvve prema. Naa choopulalo naa oopurilo naa repati kalalo lo kooda antha nuvve untunnav.
+      Nidhrapoyetappudu ninne choosthu padukuntunna roju..ela ani sandeha paduthunnava adhe chandamama ni choosthu padukuntunna.
+      Nee raakatho naa jeevitham lo nedu repu ellundu motham nuvve aypoyav alane maa inti gadapathokki velugulani testhav nee navvutho tho mana intlo inka naa jeevitham lo anukuntunna,idhi mathram em sandeham ledhu tecchesthav nuvvu naaku telusu.
+
+      Naa prema ni eppudu accept chesthunnav, nenu ekanga neetho pelli mandapam lo thaali kaduthu mana pillalatho oka chinni kutumbam ni oohinchesukuntunna...
+      naa gurinchi cheptha vinu nenu chaala manchodini, bad habits em lev, future planning antava business cheddham anukuntunna ninnu pelli chesukoni neetho sarasalu aaduthu mana buddodi muddi kaduguthu kooda oohinchesukunna okok wait future planning lo extreme ki vellipoya next nee gurinchi naaku em telusu antava nee andham tho kattesukunnav mundhu tarvatha nee navvu tho aakattukunnav inka getti mudi vesesav inka nee care choosaka nuvve naa pellam ank fix aypoya mari nannu nee mogudiga accept chesthava.
+
+      I love you so much as deep as the pacific ocean.
+
+      Ninnu puvvullo pettukoni choosukunta ey kastam raakunda choosukunta ani kaburlu cheppanu.
+      Kottukundham, godavapadadham aypoyaka avi inka ekkuvaga preminchukundham kudirithe konni maatalu ledha musugulo dhoori muddhulu.
+      Ups and downs common evari life lo ayna entha down lo unna odhileyanu, entha paiki vellina life lo neethone veltha odhileyanu nee chitikina velu mathram, okkasari nenu naadhi naa vallu ani commit aythe odhileyanu eppatiki.
+      Nuvvu premani isthe adhi rettimpu chesi istha, koppani isthe adhi premaga marchi muddhuga tirigi istha, alaka choopisthe muddhu aadi naa vodilo padukopettukunta.
+
+      Mari naatho paatu naa venta vasthava naatho yedu adugulu vesthava adhe...naa premanu angeekaristhava, so ninnu naa pellam/emey/oi/osey/ammulu..inka chaala vidhaluga prema ga piliche chanuvuni isthava mari...
+
+      Prema ga rasthunna lekha naa oopirini icchina snehitha ku
+      Preetham.V
+
+      Taruvatha nuvvu edhi anukunte adhi.
+    </div>
+
+    <div id="scrollbar">
+      <div id="scrollThumb"></div>
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 💔</button>
+  </div>
+
+  <div id="responseMessage"></div>
+</div>
+
+<!-- Sample working audio from freesound -->
+<audio id="romanticAudio" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2021/10/19/audio_3beccf5f4c.mp3?filename=romantic-piano-6396.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="sadAudio" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_2e8a3452f7.mp3?filename=slow-piano-12652.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  // Background hearts container
+  const heartsContainer = document.getElementById('hearts');
+  const letterHeartsContainer = document.getElementById('letter-hearts');
+
+  // Create heart for background
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    const size = Math.random() * 20 + 10;
+    heart.style.width = size + 'px';
+    heart.style.height = (size * 0.9) + 'px';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+    heart.style.opacity = Math.random() * 0.5 + 0.3;
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 15000);
+  }
+
+  // Create heart for letter box
+  function createLetterHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    const size = Math.random() * 14 + 7;
+    heart.style.width = size + 'px';
+    heart.style.height = (size * 0.9) + 'px';
+    heart.style.left = Math.random() * letterHeartsContainer.clientWidth + 'px';
+    heart.style.animationDuration = (Math.random() * 8 + 6) + 's';
+    heart.style.opacity = Math.random() * 0.3 + 0.2;
+    letterHeartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 12000);
+  }
+
+  setInterval(createHeart, 400);
+  setInterval(createLetterHeart, 300);
+
+  // Scrollbar elements
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const responseMessage = document.getElementById('responseMessage');
+  const romanticAudio = document.getElementById('romanticAudio');
+  const sadAudio = document.getElementById('sadAudio');
+
+  const letter = document.getElementById('letter');
+  const scrollbar = document.getElementById('scrollbar');
+  const scrollThumb = document.getElementById('scrollThumb');
+
+  // Update thumb size & position functions
+  function updateThumbSize() {
+    const ratio = letter.clientHeight / letter.scrollHeight;
+    scrollThumb.style.height = Math.max(ratio * scrollbar.clientHeight, 30) + 'px';
+  }
+
+  function updateThumbPosition() {
+    const scrollRatio = letter.scrollTop / (letter.scrollHeight - letter.clientHeight);
+    const maxTop = scrollbar.clientHeight - scrollThumb.clientHeight;
+    scrollThumb.style.top = scrollRatio * maxTop + 'px';
+  }
+
+  // Sync thumb with scroll
+  letter.addEventListener('scroll', updateThumbPosition);
+
+  // Dragging scrollbar thumb
+  let isDragging = false;
+  let startY, startTop;
+
+  scrollThumb.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startY = e.clientY;
+    startTop = parseFloat(scrollThumb.style.top) || 0;
+    document.body.style.userSelect = 'none';
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    document.body.style.userSelect = 'auto';
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const deltaY = e.clientY - startY;
+    const maxTop = scrollbar.clientHeight - scrollThumb.clientHeight;
+    let newTop = startTop + deltaY;
+    if (newTop < 0) newTop = 0;
+    if (newTop > maxTop) newTop = maxTop;
+    scrollThumb.style.top = newTop + 'px';
+
+    // Scroll letter accordingly
+    const scrollPercent = newTop / maxTop;
+    const scrollTop = scrollPercent * (letter.scrollHeight - letter.clientHeight);
+    letter.scrollTop = scrollTop;
+  });
+
+  // Initialize scrollbar
+  updateThumbSize();
+  updateThumbPosition();
+
+  window.addEventListener('resize', () => {
+    updateThumbSize();
+    updateThumbPosition();
+  });
+
+  // Audio control on button click
+  romanticAudio.volume = 0.7;
+  sadAudio.volume = 0.7;
+
+  yesBtn.addEventListener('click', () => {
+    responseMessage.textContent = "You said YES! 💖\n I Love You So Much Ammulu...lets start our roller coaster journey which never ends.";
+    responseMessage.style.color = '#b22222';
+    romanticAudio.currentTime = 0;
+    romanticAudio.play();
+    sadAudio.pause();
+  });
+
+  noBtn.addEventListener('click', () => {
+    responseMessage.textContent = "You said NO 💔\nI respect your feelings, Ammulu. My heart will wait and hope for a new dawn.";
+    responseMessage.style.color = '#4b0000';
+    sadAudio.currentTime = 0;
+    sadAudio.play();
+    romanticAudio.pause();
+  });
+</script>
+
+</body>
+</html>
